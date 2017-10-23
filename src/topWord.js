@@ -3,8 +3,9 @@ const $ = require('jQuery')
 function displayTopWord(data) {
   let wordWithFrequency = getWordAndFrequency(data);
   $('.top-word > h3').append(
-    `${wordWithFrequency.word}
-    (${wordWithFrequency.frequency})`
+    `<h5><span id="new-top-word">${wordWithFrequency.word}
+    (${wordWithFrequency.frequency})
+    </span></h5>`
   )
 }
 
@@ -14,4 +15,8 @@ function getWordAndFrequency(data) {
   return {word, frequency}
 }
 
-module.exports = {displayTopWord}
+function clearTopWord() {
+  $('#new-top-word').remove()
+}
+
+module.exports = {displayTopWord, clearTopWord}

@@ -1,4 +1,5 @@
 const $ = require('jQuery')
+const API = require('./apiCalls')
 
 function submitWords() {
   $(document).ready(function() {
@@ -37,9 +38,11 @@ function calculateWordFrequencies(words) {
   wordsToArray(wordsWithFrequencies)
 }
 
+
 function wordsToArray(words) {
   let wordsArray = []
   for(var key in words){ wordsArray.push({key: key, value: words[key]}) }
+  API.postWords(wordsArray);
   displaySubmittedWords(wordsArray)
 }
 

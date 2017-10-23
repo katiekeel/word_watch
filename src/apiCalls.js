@@ -10,4 +10,21 @@ function getTopWord() {
   });
 }
 
+function postWords(words) {
+  words.forEach(function(newWord) {
+    $.ajax({
+      type: "POST",
+      url: "https://wordwatch-api.herokuapp.com/api/v1/words",
+      data: { word: { value: newWord.key } },
+      success: function(data) {
+        topWord.clearTopWord()
+      }
+    })
+  })
+  getTopWord();
+}
+
+
 getTopWord();
+
+module.exports = {postWords}
