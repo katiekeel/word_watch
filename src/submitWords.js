@@ -22,6 +22,7 @@ function getWordsFromBox() {
 function parseText(text) {
   let wordString = text.replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"");
   let words = wordString.split(/\s+/g);
+  words = words.filter(function(item) {return !(item == "")});
   calculateWordFrequencies(words.sort())
 }
 
@@ -33,26 +34,19 @@ function calculateWordFrequencies(words) {
       }
       wordsWithFrequencies[word] += 1;
   })
-  sortWordsByFrequency(wordsWithFrequencies)
+  wordsToArray(wordsWithFrequencies)
 }
 
-function sortWordsByFrequency(words) {
-  Object.keys(words).sort().forEach(function(key) {
-    let value = words[key]
-    delete words[key]
-    words[key] = value
-  })
-  displaySubmittedWords(words)
+function wordsToArray(words) {
+  let wordsArray = []
+  for(var key in words){ wordsArray.push({key: key, value: words[key]}) }
+  displaySubmittedWords(wordsArray)
 }
 
-function clearSubmittedWords() {
-
-}
-
-function displaySubmittedWords(words) {
-  Object.keys(words).forEach(function(word) {
+function displaySubmittedWords(wordsArray) {
+  wordsArray.forEach(function(word) {
     $(".word-count").append(
-      `<span font-size=${words['word']}em> ${word} </span><br/><br/>`
+      `<span style="font-size:${word.value}em">${word.key}</span><br/><br/>`
     )
   })
 }
