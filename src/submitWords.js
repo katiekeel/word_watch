@@ -4,31 +4,35 @@ function submitWords() {
   $(document).ready(function() {
     $(":button").click(function(event) {
       event.preventDefault();
-      let text = getWordsFromBox();
-      findWordFrequency(text);
+      getWordsFromBox();
     })
   })
 }
 
 function getWordsFromBox() {
   let text = $("textarea").val();
-  return text
-}
-
-function findWordFrequency(text) {
   parseText(text);
-
 }
 
 function parseText(text) {
   let wordString = text.replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"");
   let words = wordString.split(/\s+/g);
+  calculateWordFrequencies(words.sort())
+}
 
-  console.log(words)
+function calculateWordFrequencies(words) {
+  let wordsWithFrequencies = {};
+  words.forEach(function(word) {
+      if (!wordsWithFrequencies[word]) {
+          wordsWithFrequencies[word] = 0;
+      }
+      wordsWithFrequencies[word] += 1;
+  });
+  sortWordsWithFrequencies(wordsWithFrequencies)
+}
 
-  let sortedWords = words.sort();
-
-  console.log(sortedWords)
+function sortWordsWithFrequencies(wordsWithFrequencies) {
+  console.log(wordsWithFrequencies);
 }
 
 submitWords();
