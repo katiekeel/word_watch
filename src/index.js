@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
-  // have fun!
-})
-
+require('jQuery')
+require('./apiCalls')
+require('./topWord')
+require('./submitWords')
