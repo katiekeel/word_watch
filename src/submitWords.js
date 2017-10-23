@@ -46,7 +46,7 @@ function wordsToArray(words) {
 function displaySubmittedWords(wordsArray) {
   wordsArray.forEach(function(word) {
     $(".word-count").append(
-      `<span style="font-size:${word.value}em">${word.key}</span><br/><br/>`
+      `<span style="font-size:${word.value}em">${word.key}&nbsp;</span>`
     )
   })
 }
